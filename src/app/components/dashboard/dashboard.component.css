@@ -1,0 +1,21 @@
+.main-text {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.secondary-text {
+    font-size: 1.8rem;
+}
+
+.tertiary-text {
+    font-size: 1.2rem;
+}
+
+.spinner {
+    position: absolute;
+    right: 50%;
+    top: 53%;
+    font-size: 1.8rem;
+    height: 3rem;
+    width: 3rem;
+}

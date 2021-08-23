@@ -1,0 +1,82 @@
+<div class="container" style="position: relative;" *ngIf='data != undefined'>
+  <!--Error alert-->
+  <div class="alert alert-warning alert-dismissible fade show mt-2 text-center" *ngIf='err == true' role="alert">
+    Ops sorry, we haven't found the weather in this city...
+    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+
+    </button>
+  </div>
+
+  <!--City and country-->
+  <div class="text-center secondary-text mt-4">
+    {{data.name}}, {{data.sys.country}}
+  </div>
+
+  <!--Currently weather and date -->
+  <div class="row">
+    <div class="col-md-6 text-center mt-4">
+      <p class="main-text">{{now | date:'HH:mm:ss'}}</p>
+      <p class="secondary-text">{{today}}</p>
+      <p class="tertiary-text">{{now | date}}</p>
+    </div>
+    <div class="col-md-6 text-center mt-4">
+      <p class="main-text">{{data.main.temp - 273 | number: '1.2-2'}}ºC</p>
+      <p class="secondary-text">
+          <img [src]="imgWeather" onerror="this.src='https://openweathermap.org/img/w/02d.png'" alt="descriptive image of the current climate">
+
+        {{data.weather[0].description}}
+      </p>
+      <p class="tertiary-text">Low {{data.main.temp_min - 273 | number: '1.2-2'}}ºC / High {{data.main.temp_max - 273 |
+        number: '1.2-2'| number: '1.2-2'}}ºC</p>
+    </div>
+  </div>
+  <hr>
+
+  <!-- Sunrise, Sunset, Wind, Humidity -->
+  <div class="alert alert-primary row mt-5 text-center">
+
+    <ul class="nav nav-tabs d-flex justify-content-center">
+      <li class="nav-item col-4">
+        <a class="nav-link active" data-bs-toggle="tab" href="#home">Sunrise / Sunset</a>
+      </li>
+      <li class="nav-item col-4">
+        <a class="nav-link" data-bs-toggle="tab" href="#profile">Wind / Humidity</a>
+      </li>
+    </ul>
+
+    <div id="myTabContent" class="tab-content mt-3">
+      <div class="tab-pane fade active show" id="home">
+        <div class="row d-flex">
+          <div class="col-sm-12 col-md-6 text-center">
+            <p style="font-size: 1.5rem;"> <i class="bi bi-sunrise" style="font-size: 2rem;"></i><span
+                class="p-2">{{data.sys.sunrise | date:'hh:mm'}}</span></p>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <p style="font-size: 1.5rem;"> <i class="bi bi-sunset" style="font-size: 2rem;"></i><span
+                class="p-2">{{data.sys.sunset | date:'HH:mm'}}</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="profile">
+        <div class="row d-flex">
+          <div class="col-sm-12 col-md-6 text-center">
+            <p style="font-size: 1.5rem;"><i class="bi bi-wind" style="font-size: 2rem;"></i> <span
+                class="p-2">{{data.wind.speed * 1.852 | number: '1.2-2'}} km/h</span></p>
+          </div>
+          <div class="col-sm-12 col-md-6 text-center">
+            <p style="font-size: 1.5rem;"> <i class="bi bi-droplet"></i><span class="p-2">{{data.main.humidity}}
+                %</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Spinner-->
+  <div class="spinner-border text-primary spinner" *ngIf='data == undefined' role="status">
+  </div>
+
+</div>
+
+
+<div class="mt-4"></div>
